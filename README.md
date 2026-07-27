@@ -1,4 +1,4 @@
-# 📊 SQL Business Analysis
+# SQL Business Analysis
 
 Projeto desenvolvido com o objetivo de demonstrar habilidades em **SQL Server** por meio de consultas voltadas para problemas reais de negócio utilizando um banco de dados relacional de uma loja de varejo fictícia.
 
@@ -6,7 +6,7 @@ O projeto simula situações encontradas no dia a dia de analistas de dados, exp
 
 ---
 
-## 🎯 Objetivo
+## Objetivo
 
 Desenvolver consultas SQL que respondam perguntas de negócio utilizando boas práticas de modelagem, organização e documentação.
 
@@ -24,7 +24,7 @@ Além da construção das consultas, o projeto busca demonstrar conhecimento em:
 
 ---
 
-# 🗂 Banco de Dados
+# Banco de Dados
 
 O projeto utiliza o banco **LojaVarejoDB**, composto por **11 tabelas** divididas entre dimensões e fatos.
 
@@ -92,7 +92,7 @@ sql-business-analysis/
 
 ---
 
-# 📌 Consultas Desenvolvidas
+#  Consultas Desenvolvidas
 
 ## 01 - Receita Total
 
@@ -339,7 +339,7 @@ KPIs:
 
 ---
 
-# 💡 Principais Habilidades Demonstradas
+#  Principais Habilidades Demonstradas
 
 ✔ SQL Server
 
@@ -381,7 +381,7 @@ KPIs:
 
 ---
 
-# 📈 Possíveis Insights
+#  Possíveis Insights
 
 As consultas desenvolvidas permitem responder perguntas como:
 
@@ -398,7 +398,7 @@ As consultas desenvolvidas permitem responder perguntas como:
 
 ---
 
-# 🚀 Tecnologias Utilizadas
+#  Tecnologias Utilizadas
 
 - SQL Server
 - T-SQL
@@ -406,7 +406,3 @@ As consultas desenvolvidas permitem responder perguntas como:
 - GitHub
 
 ---
-
-# 👨‍💻 Autor
-
-Projeto desenvolvido para fins de estudo e composição de portfólio em Análise de Dados, com foco na aplicação de SQL em cenários de negócio.
