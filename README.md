@@ -5,6 +5,7 @@ Projeto desenvolvido com o objetivo de demonstrar habilidades em **SQL Server** 
 O projeto simula situações encontradas no dia a dia de analistas de dados, explorando métricas comerciais, comportamento de clientes, desempenho de produtos, retenção, ranking de vendas e indicadores estratégicos.
 
 ---
+<img width="440" height="232" alt="Screenshot 2026-07-28 154859" src="https://github.com/user-attachments/assets/cf7eaf5a-6fe9-4086-944b-659cecf2677a" />
 
 ## Objetivo
 
