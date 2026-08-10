@@ -1,0 +1,41 @@
+12 - Produtos sem Venda
+Objetivo
+
+Identificar produtos que nunca foram vendidos.
+
+-------------------------
+
+Consulta
+
+SELECT
+    pr.produto_id,
+    pr.nome
+FROM produtos AS pr
+LEFT JOIN itens_pedido AS ip
+    ON pr.produto_id = ip.produto_id
+WHERE ip.produto_id IS NULL;
+
+-----------------------------
+
+Lógica da análise
+
+Todos os produtos são inicialmente selecionados.
+
+O LEFT JOIN procura registros correspondentes em itens_pedido.
+
+Quando não existe nenhum item associado ao produto, os campos de itens_pedido ficam NULL.
+
+O filtro:
+
+WHERE ip.produto_id IS NULL
+
+identifica justamente esses produtos.
+
+Conceitos utilizados
+LEFT JOIN
+IS NULL
+Relacionamento entre tabelas
+Identificação de registros sem correspondência
+Regra de negócio
+
+Um produto é considerado sem venda quando não possui nenhum registro associado em itens_pedido.
