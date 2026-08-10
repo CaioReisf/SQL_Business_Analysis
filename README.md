@@ -58,7 +58,6 @@ sql-business-analysis/
 ├── database/
 │   ├── create_tables.sql
 │   ├── inserts.sql
-│   └── constraints.sql
 │
 ├── queries/
 │   ├── 01_receita_total.sql
@@ -81,11 +80,6 @@ sql-business-analysis/
 │   ├── 18_clientes_vip.sql
 │   ├── 19_fornecedores.sql
 │   └── 20_dashboard.sql
-│
-├── docs/
-│   ├── dicionario_dados.md
-│   ├── modelo_relacional.png
-│   └── insights.md
 │
 └── README.md
 ```
