@@ -1,0 +1,44 @@
+11 - Produtos com Estoque Crítico
+Objetivo
+
+Identificar produtos cujo estoque atual está abaixo do estoque mínimo definido.
+
+---------------------------
+
+Consulta
+
+SELECT
+    produto_id,
+    nome,
+    estoque_atual,
+    estoque_minimo,
+    estoque_minimo - estoque_atual AS quantidade_repor
+FROM produtos
+WHERE estoque_atual < estoque_minimo
+ORDER BY
+    quantidade_repor DESC;
+
+-----------------------------
+
+Lógica da análise
+
+A consulta compara diretamente:
+
+estoque_atual
+
+com:
+
+estoque_minimo
+
+Produtos cujo estoque atual é inferior ao limite mínimo são considerados críticos.
+
+A coluna quantidade_repor mostra quanto seria necessário adicionar para atingir o estoque mínimo.
+
+Conceitos utilizados
+Comparação entre colunas
+WHERE
+Operações matemáticas
+ORDER BY
+Regra de negócio
+
+Produtos abaixo do estoque mínimo precisam de reposição.
