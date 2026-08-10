@@ -1,0 +1,48 @@
+14 - Receita Mensal
+Objetivo
+
+Apresentar a evolução do faturamento ao longo do tempo.
+
+-------------------
+
+Consulta
+
+SELECT
+    DATEFROMPARTS(
+        YEAR(pe.data_pedido),
+        MONTH(pe.data_pedido),
+        1
+    ) AS mes,
+    SUM(pe.valor_total) AS faturamento
+FROM pedidos AS pe
+WHERE pe.status = 'concluido'
+GROUP BY
+    DATEFROMPARTS(
+        YEAR(pe.data_pedido),
+        MONTH(pe.data_pedido),
+        1
+    )
+ORDER BY
+    mes;
+
+---------------------------
+
+Lógica da análise
+
+As datas dos pedidos são transformadas em períodos mensais utilizando DATEFROMPARTS().
+
+Todos os pedidos pertencentes ao mesmo mês são agrupados e seu valor_total é somado.
+
+O resultado permite analisar a evolução do faturamento ao longo do tempo.
+
+Conceitos utilizados
+DATEFROMPARTS()
+YEAR()
+MONTH()
+SUM()
+GROUP BY
+ORDER BY
+Análise temporal
+Regra de negócio
+
+Somente pedidos concluídos são considerados no faturamento mensal.
