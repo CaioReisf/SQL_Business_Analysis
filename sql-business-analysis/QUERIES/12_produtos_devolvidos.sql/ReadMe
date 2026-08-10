@@ -1,0 +1,44 @@
+12 - Produtos Mais Devolvidos
+Objetivo
+
+Identificar os produtos que apresentam maior quantidade de ocorrências de devolução.
+
+-----------------------------
+
+Consulta
+
+SELECT
+    pr.produto_id,
+    pr.nome,
+    COUNT(d.devolucao_id) AS quantidade_devolucoes
+FROM devolucoes AS d
+INNER JOIN itens_pedido AS i
+    ON i.item_id = d.item_id
+INNER JOIN produtos AS pr
+    ON pr.produto_id = i.produto_id
+GROUP BY
+    pr.produto_id,
+    pr.nome
+ORDER BY
+    quantidade_devolucoes DESC;
+
+--------------------------
+
+Lógica da análise
+
+A tabela devolucoes é relacionada aos itens dos pedidos através de item_id.
+
+A partir do item, é possível identificar o produto correspondente.
+
+As devoluções são então agrupadas por produto e contabilizadas.
+
+Conceitos utilizados
+INNER JOIN
+COUNT()
+GROUP BY
+ORDER BY
+Regra de negócio
+
+A métrica representa o número de ocorrências de devolução por produto.
+
+O banco atual não possui uma coluna específica indicando a quantidade de unidades devolvidas. Portanto, não é possível afirmar quantas unidades físicas foram devolvidas, apenas quantas ocorrências de devolução foram registradas.
