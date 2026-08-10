@@ -1,0 +1,65 @@
+07 - Taxa de Recompra
+Objetivo
+
+Identificar quantos clientes realizaram uma nova compra após a primeira e calcular a taxa de recompra.
+
+-----------------------------
+
+Consulta
+
+WITH compras AS
+(
+    SELECT
+        pe.cliente_id,
+        COUNT(pe.pedido_id) AS quantidade_compras
+    FROM pedidos AS pe
+    WHERE pe.status = 'concluido'
+    GROUP BY
+        pe.cliente_id
+)
+SELECT
+    COUNT(*) AS clientes_com_compra,
+    SUM(
+        CASE
+            WHEN quantidade_compras > 1 THEN 1
+            ELSE 0
+        END
+    ) AS clientes_que_recompraram,
+    CAST(
+        SUM(
+            CASE
+                WHEN quantidade_compras > 1 THEN 1
+                ELSE 0
+            END
+        ) * 100.0 / COUNT(*)
+        AS DECIMAL(5,2)
+    ) AS taxa_recompra
+FROM compras;
+
+--------------------------
+
+Lógica da análise
+
+Primeiramente, a CTE contabiliza a quantidade de pedidos concluídos realizados por cada cliente.
+
+Clientes com mais de um pedido são considerados clientes que realizaram recompra.
+
+A taxa é calculada através da relação entre:
+
+Clientes que realizaram recompra
+÷
+Clientes que realizaram pelo menos uma compra
+× 100
+Conceitos utilizados
+CTE
+COUNT()
+SUM()
+CASE
+GROUP BY
+Agregação
+Cálculo percentual
+Regra de negócio
+
+Um cliente é considerado recorrente quando possui pelo menos duas compras concluídas.
+
+Clientes que nunca realizaram uma compra não entram no denominador da taxa.
