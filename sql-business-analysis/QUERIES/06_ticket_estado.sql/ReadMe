@@ -1,0 +1,39 @@
+06 - Ticket Médio por Estado
+Objetivo
+
+Comparar o ticket médio dos pedidos entre os diferentes estados dos clientes.
+
+------------------------
+
+Consulta
+SELECT
+    c.estado,
+    AVG(pe.valor_total) AS ticket_medio
+FROM clientes AS c
+INNER JOIN pedidos AS pe
+    ON pe.cliente_id = c.cliente_id
+WHERE pe.status = 'concluido'
+GROUP BY
+    c.estado
+ORDER BY
+    ticket_medio DESC;
+
+-----------------------
+
+Lógica da análise
+
+Os clientes são relacionados aos seus pedidos e agrupados de acordo com o estado.
+
+O ticket médio é calculado através da média do valor dos pedidos concluídos.
+
+Ticket Médio = Soma dos valores dos pedidos / Quantidade de pedidos
+Conceitos utilizados
+INNER JOIN
+AVG()
+GROUP BY
+ORDER BY
+Regra de negócio
+
+O ticket médio é calculado sobre o valor dos pedidos, e não sobre os itens individuais.
+
+Essa definição evita que pedidos com maior quantidade de produtos tenham peso excessivo no cálculo.
