@@ -1,0 +1,54 @@
+11 - Ranking de Vendedores
+Objetivo
+
+Comparar o desempenho dos vendedores com base no faturamento gerado.
+
+-----------------------
+
+Consulta
+
+WITH metricas AS
+(
+    SELECT
+        f.funcionario_id,
+        f.nome,
+        SUM(pe.valor_total) AS faturamento
+    FROM funcionarios AS f
+    INNER JOIN pedidos AS pe
+        ON pe.funcionario_id = f.funcionario_id
+    WHERE pe.status = 'concluido'
+    GROUP BY
+        f.funcionario_id,
+        f.nome
+)
+SELECT
+    funcionario_id,
+    nome,
+    faturamento,
+    RANK() OVER (
+        ORDER BY faturamento DESC
+    ) AS ranking
+FROM metricas
+ORDER BY
+    ranking;
+
+----------------------------
+
+Lógica da análise
+
+Primeiramente é calculado o faturamento total de cada funcionário.
+
+Em seguida, a função RANK() classifica os vendedores do maior para o menor faturamento.
+
+Conceitos utilizados
+CTE
+SUM()
+GROUP BY
+RANK()
+Funções de janela
+INNER JOIN
+Regra de negócio
+
+Somente pedidos concluídos são considerados no faturamento.
+
+Em caso de empate, os vendedores recebem a mesma posição no ranking.
