@@ -1,0 +1,42 @@
+13 - Avaliação Média dos Produtos
+Objetivo
+
+Calcular a nota média recebida por cada produto.
+
+-----------------------------
+
+Consulta
+
+SELECT
+    pr.produto_id,
+    pr.nome,
+    AVG(av.nota) AS media_nota
+FROM produtos AS pr
+INNER JOIN avaliacoes AS av
+    ON av.produto_id = pr.produto_id
+WHERE pr.ativo = 1
+GROUP BY
+    pr.produto_id,
+    pr.nome
+ORDER BY
+    media_nota DESC;
+
+------------------------
+
+Lógica da análise
+
+Os produtos são relacionados às suas respectivas avaliações.
+
+A função AVG() calcula a média das notas recebidas por cada produto.
+
+Somente produtos ativos são considerados.
+
+Conceitos utilizados
+INNER JOIN
+AVG()
+GROUP BY
+ORDER BY
+Agregação
+Regra de negócio
+
+A média representa a avaliação dos produtos ativos que possuem pelo menos uma avaliação.
