@@ -1,0 +1,50 @@
+05 - Receita por Categoria
+Objetivo
+
+Calcular o faturamento gerado por cada categoria de produtos.
+
+---------------------------
+Consulta:
+
+SELECT
+    c.categoria_id,
+    c.nome,
+    SUM(
+        (i.preco_unitario - i.desconto_item) * i.quantidade
+    ) AS faturamento
+FROM categorias AS c
+INNER JOIN produtos AS p
+    ON p.categoria_id = c.categoria_id
+INNER JOIN itens_pedido AS i
+    ON i.produto_id = p.produto_id
+INNER JOIN pedidos AS pe
+    ON pe.pedido_id = i.pedido_id
+WHERE pe.status = 'concluido'
+GROUP BY
+    c.categoria_id,
+    c.nome
+ORDER BY
+    faturamento DESC;
+
+---------------------------
+
+Lógica da análise
+
+A categoria está relacionada aos produtos, que por sua vez estão relacionados aos itens dos pedidos.
+
+O faturamento é calculado considerando o preço do produto, o desconto aplicado e a quantidade vendida.
+
+(preço unitário - desconto) × quantidade
+
+Somente itens pertencentes a pedidos concluídos são considerados.
+
+Conceitos utilizados
+INNER JOIN
+SUM()
+GROUP BY
+Cálculo de métricas
+Agregação
+Filtros
+Regra de negócio
+
+O faturamento por categoria é calculado a partir dos itens vendidos, permitindo identificar corretamente quanto cada categoria contribuiu para a receita.
