@@ -1,0 +1,47 @@
+15 - Receita por Canal
+Objetivo
+
+Comparar o faturamento gerado pelos diferentes canais de venda:
+
+Site
+App
+Marketplace
+Loja Física
+
+-----------------------
+
+Consulta
+
+SELECT
+    pe.canal,
+    SUM(pe.valor_total) AS faturamento
+FROM pedidos AS pe
+WHERE pe.status = 'concluido'
+GROUP BY
+    pe.canal
+ORDER BY
+    faturamento DESC;
+
+---------------------------
+
+Lógica da análise
+
+A coluna canal já está presente na tabela pedidos, portanto não é necessário realizar JOIN com lojas.
+
+Os pedidos são agrupados por canal e o faturamento é calculado através da soma de valor_total.
+
+Conceitos utilizados
+SUM()
+GROUP BY
+ORDER BY
+WHERE
+Agregação
+Regra de negócio
+
+Somente pedidos concluídos são considerados no faturamento.
+
+Observação
+
+pedidos.canal representa o canal da venda, enquanto lojas.tipo representa o tipo de loja.
+
+Portanto, para este desafio, a análise deve utilizar pedidos.canal.
