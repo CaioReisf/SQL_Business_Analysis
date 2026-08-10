@@ -1,0 +1,78 @@
+08 - Ranking Mensal por Categoria
+Objetivo
+
+Classificar as categorias de produtos de acordo com o faturamento gerado em cada mês.
+
+------------------------
+
+Consulta
+WITH metricas AS
+(
+    SELECT
+        ct.categoria_id,
+        ct.nome,
+        DATEFROMPARTS(
+            YEAR(pe.data_pedido),
+            MONTH(pe.data_pedido),
+            1
+        ) AS mes,
+        SUM(
+            (i.preco_unitario - i.desconto_item)
+            * i.quantidade
+        ) AS faturamento
+    FROM categorias AS ct
+    INNER JOIN produtos AS p
+        ON p.categoria_id = ct.categoria_id
+    INNER JOIN itens_pedido AS i
+        ON i.produto_id = p.produto_id
+    INNER JOIN pedidos AS pe
+        ON pe.pedido_id = i.pedido_id
+    WHERE pe.status = 'concluido'
+      AND pe.data_pedido >= '20260101'
+    GROUP BY
+        ct.categoria_id,
+        ct.nome,
+        DATEFROMPARTS(
+            YEAR(pe.data_pedido),
+            MONTH(pe.data_pedido),
+            1
+        )
+)
+SELECT
+    nome,
+    mes,
+    faturamento,
+    ROW_NUMBER() OVER (
+        PARTITION BY mes
+        ORDER BY faturamento DESC
+    ) AS ranking
+FROM metricas
+ORDER BY
+    mes,
+    ranking;
+
+-----------------------------
+
+Lógica da análise
+
+A CTE calcula o faturamento de cada categoria em cada mês.
+
+Depois, ROW_NUMBER() cria um ranking independente para cada mês através de:
+
+PARTITION BY mes
+
+Assim, o ranking é reiniciado a cada novo mês.
+
+Conceitos utilizados
+CTE
+DATEFROMPARTS()
+YEAR()
+MONTH()
+SUM()
+ROW_NUMBER()
+PARTITION BY
+ORDER BY
+Agregação temporal
+Regra de negócio
+
+O ranking considera somente pedidos concluídos e classifica as categorias pelo faturamento mensal.
